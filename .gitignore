@@ -1,3 +1,4 @@
 public/comics/*
 !public/comics/.gitkeep
 node_modules/
+temp.js
