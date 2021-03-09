@@ -21,14 +21,17 @@ app.get("/api/comics", (req, res) => { //When going to a website your computer i
 });
 
 app.get("/api/comics/:id/", (req,res) => {
-    formatId = req.params.id.replace("&", ' ');
+    let formatId = req.params.id.replace("&", ' ');
+    let comicPath = path.join("comics", formatId);
     let results = new Array;
     fs.readdir(path.join(__dirname, "public", "comics", formatId), (err, files) =>{
         if (err) throw err;
         files.forEach((file)=>{
-            results.push(file);
+            if (file.endsWith(".jpg")){
+                results.push(file);
+            }
         })
-        res.json({parent: formatId, results: results});
+        res.json({parent: comicPath, results: results});
     })
 })
 
