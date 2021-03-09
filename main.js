@@ -10,10 +10,6 @@ class Comic {
         this.metadata = [];
     }
 }
-const comic1 = path.join(__dirname, "public", "comics", "1/");
-
-
-
 
 app.get("/api/comics", (req, res) => { //When going to a website your computer is performing a get request, / is root of website, followed by function with request and response
     var comicFolders = new Array;
@@ -25,17 +21,17 @@ app.get("/api/comics", (req, res) => { //When going to a website your computer i
             }
         })
         var returnData = new Array; //Create returnData array
-        for (const comic of comicFolders){ //For 
-            let comicPath = path.join(__dirname, "public", "comics", comic)
-            fs.readdir(comicPath, (err, images) =>{
-                if (err) throw err;
-                let itComic = new Comic(comic);
-                images.forEach((image) => {
-                    itComic.images.push(image);
+        for (const comic of comicFolders){ //For each comic in comicFolders Array
+            let comicPath = path.join(__dirname, "public", "comics", comic) //Grabs comic path
+            fs.readdir(comicPath, (err, images) =>{ //Read contents of each comic path folder
+                if (err) throw err; //If error throw erre
+                let itComic = new Comic(comic); //New Comic Object
+                images.forEach((image) => { //For each image read
+                    itComic.images.push(image); //push image to object images property
                 })
-                returnData.push(itComic);
-                if (comic == comicFolders[comicFolders.length - 1]){
-                    res.json(returnData);
+                returnData.push(itComic); //Push out object
+                if (comic == comicFolders[comicFolders.length - 1]){ //If on last object
+                    res.json(returnData); //Return array of objects as json data
                 }
             })
         }        
