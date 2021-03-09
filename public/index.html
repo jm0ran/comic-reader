@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>Test</title>
+    <script>
+        fetch("http://localhost:5000/api/comics/")
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    </script>
 </head>
 <body>
     <div id="outer">
