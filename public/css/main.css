@@ -12,3 +12,7 @@ h1{
 #main{
     text-align: center;
 }
+img{
+    height: 90vh;
+    width: auto;
+}

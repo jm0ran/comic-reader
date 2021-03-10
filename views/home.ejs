@@ -7,19 +7,31 @@
     <link rel="stylesheet" href="css/main.css">
     <title>Test</title>
     <script>
-        const prepare = () =>{
-            const loadImages = (data) => {
-                for (const item of data.results){
-                    document.getElementById("main").innerHTML += `<img width="auto" height="800" src="comics/<%=data.message%>/${item}"><br>`;
+        var currentIndex = 0;
+        var returnData = null;
+        const changeImg = (change) => {
+            visImage = document.getElementById("visableImage");
+            if (visImage.src != null){
+                let newIndex = currentIndex + change;
+                if (typeof returnData.results[newIndex] != "undefined"){
+                    console.log(returnData.results[newIndex]);
+                    visImage.src = `comics/<%=data.message%>/${returnData.results[newIndex]}`;
+                    currentIndex = newIndex;
                 }
+                
+                
             }
-    
-            fetch("http://localhost:5000/api/comics/<%= data.message %>")
+        }
+
+        const prepare = () =>{
+            fetch("http://localhost:5000/api/comics/<%=data.message %>")
                 .then((res) => {
                     return res.json();
                 })
                 .then((data) => {
-                    loadImages(data)
+                    returnData = data;
+                    console.log(data);
+                    document.getElementById("visableImage").src =`comics/<%=data.message%>/${data.results[currentIndex]}`;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -28,13 +40,11 @@
     </script>
 </head>
 <body onload="prepare()">
-    <div id="head">
-        <h1>
-            <%= data.message %>
-        </h1>
-    </div><br>
     <div id="main">
-        
+        <div id=reader>
+            <img id="visableImage" onclick="changeImg(1);">
+        </div>
+        <button onclick="changeImg(-1);"> Go Back</button>
     </div>
 </body>
 

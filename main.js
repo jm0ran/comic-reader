@@ -32,7 +32,7 @@ app.get("/api/comics/:id/", (req,res) => {
     fs.readdir(path.join(__dirname, "public", "comics", formatId), (err, files) =>{
         if (err) throw err;
         files.forEach((file)=>{
-            if (file.endsWith(".jpg")){
+            if (file.endsWith(".jpg") || file.endsWith(".png") || file.endsWith(".jpeg")){
                 results.push(file);
             }
         })
