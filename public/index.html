@@ -15,7 +15,8 @@
 <script>
     const loadLinks = (data) => {
         for (const item of data.results){
-            document.getElementById("main").innerHTML += `<h1> ${item} </h1>`
+            const itemLink = item.replace("&", " ");
+            document.getElementById("main").innerHTML += `<a href="/${item}"> ${item} </h1><br>`;
         }
     }
 

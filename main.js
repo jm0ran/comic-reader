@@ -1,9 +1,14 @@
 const express = require("express"); //Imports express
 const path = require("path"); //Node js module to deal with file paths
 const fs = require("fs"); //fs is used to work with the file system
+const ejs = require("ejs")//
 
 const app = express(); //Initializes a new app variable with express
 
+
+//Set a Static folder, kind of like default folder
+app.use(express.static(path.join(__dirname, 'public')));
+app.set("view engine", "ejs");
 
 //Returns comic directory to user, only returns folders
 app.get("/api/comics", (req, res) => { //When going to a website your computer is performing a get request, / is root of website, followed by function with request and response
@@ -35,9 +40,12 @@ app.get("/api/comics/:id/", (req,res) => {
     })
 })
 
+app.get("/:comicName", (req, res) => {
+    res.render("home", {data: {message : req.params.comicName}});
+    //res.json(req.params.comicName);
+})
 
-//Set a Static folder, kind of like default folder
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 
