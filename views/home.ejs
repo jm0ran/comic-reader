@@ -24,7 +24,7 @@
         }
 
         const prepare = () =>{
-            fetch("http://localhost:5000/api/comics/<%=data.message %>")
+            fetch("http://192.168.1.2:5000/api/comics/<%=data.message %>")
                 .then((res) => {
                     return res.json();
                 })

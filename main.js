@@ -40,6 +40,15 @@ app.get("/api/comics/:id/", (req,res) => {
     })
 })
 
+app.get("/api/comics/:id/:fileName", (req, res) => {
+    formatFolder = req.params.id.replace('&', ' ');
+    formatFile = req.params.fileName.replace('&', ' ');
+    console.log("request");
+    let filePath = path.join(__dirname, "public",  "comics", formatFolder, formatFile);
+    res.sendFile(filePath);
+
+})
+
 app.get("/:comicName", (req, res) => {
     res.render("home", {data: {message : req.params.comicName}});
     //res.json(req.params.comicName);
