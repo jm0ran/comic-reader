@@ -17,6 +17,7 @@ body, html{
 	display: inline-block;
 	color: #f2edd7;
 	vertical-align: top;
+	margin-bottom: 40px;
 }
 figcaption{
 	padding-top: 10px;
