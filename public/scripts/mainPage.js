@@ -6,7 +6,7 @@ const loadComics = (data) => {
     }
 }
 
-fetch("http://192.168.1.2:5000/api/comics/")
+fetch(`http://${window.location.hostname}:5000/api/comics/`)
     .then((res) => {
         return res.json();
     })
