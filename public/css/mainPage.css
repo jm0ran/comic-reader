@@ -1,0 +1,35 @@
+body, html{
+	margin: 0;
+	padding: 0;
+	background-color: #0D1117;
+}
+#mainContainer{
+	background-color: #0D1117;
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	/*overflow: scroll;*/
+}
+.book{
+	height: 20vh;
+	width: 14vh;
+	margin: 2em;
+	display: inline-block;
+	color: #f2edd7;
+	vertical-align: top;
+}
+figcaption{
+	padding-top: 10px;
+	height: 100px;
+}
+img{
+	filter: drop-shadow(15px 4px 4px black);
+}
+#bookCase{
+	text-align: center;
+}
+#topBar{
+	background-color: #29a19c;
+	font-size: 40px;
+	padding: 20px;
+}

@@ -10,6 +10,12 @@ const app = express(); //Initializes a new app variable with express
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 
+app.get("/home", (req, res) => {
+    res.render("mainPage", {})
+})
+
+
+
 //Returns comic directory to user, only returns folders
 app.get("/api/comics", (req, res) => { //When going to a website your computer is performing a get request, / is root of website, followed by function with request and response
     let comicFolders = new Array;
@@ -50,7 +56,7 @@ app.get("/api/comics/:id/:fileName", (req, res) => {
 })
 
 app.get("/:comicName", (req, res) => {
-    res.render("home", {data: {message : req.params.comicName}});
+    res.render("reader", {data: {message : req.params.comicName}});
     //res.json(req.params.comicName);
 })
 
