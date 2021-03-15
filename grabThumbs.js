@@ -1,7 +1,6 @@
-const { DESTRUCTION } = require("dns");
-
 fs = require("fs");
 path = require("path");
+jimp = require("jimp");
 
 module.exports = {
     async run(){
@@ -13,18 +12,23 @@ module.exports = {
                     fs.readdir(path.join(__dirname, "public", "comics", folder), (err, files) =>{
                       files.forEach((cover, index)=>{
                           if (index === 0){
-                              source = path.join(__dirname, "public", "comics", folder, cover);
-                              let extension = null;
-                              if (cover.endsWith(".jpg")){
-                                extension = ".jpg";
-                              }
-                              else if (cover.endsWith(".png")){
-                                extension = ".png";
-                              }
-                              destination = path.join(__dirname, "public", "assets", "testCompression", folder + extension);
-                              fs.copyFile(source, destination, (err) =>{
-                                  if (err) throw err;
-                              })
+                            let extension = ".jpg";
+                            source = path.join(__dirname, "public", "comics", folder, cover);
+                            destination = path.join(__dirname, "public", "assets", "testCompression", folder + extension);
+                            if (cover.endsWith(".png")){
+                               jimp.read(source, (err, image) => {
+                                   if (err){
+                                       throw err;
+                                   }else{
+                                       image.write(destination);
+                                   }
+                               }) 
+                            }
+                            else{
+                                fs.copyFile(source, destination, (err) =>{
+                                    if (err) throw err;
+                                })
+                            }
                           }
                           else{
                               return false;

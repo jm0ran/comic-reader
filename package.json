@@ -25,6 +25,7 @@
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-pngquant": "^9.0.2",
+    "jimp": "^0.16.1",
     "nodemon": "^2.0.7"
   }
 }

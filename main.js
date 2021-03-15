@@ -6,7 +6,7 @@ const ejs = require("ejs")//
 const generateThumbs = require("./generateThumbs");
 const grabThumbs = require("./grabThumbs");
 
-grabThumbs.run();
+generateThumbs.run();
 
 const app = express(); //Initializes a new app variable with express
 

@@ -1,6 +1,4 @@
 const imagemin = require('imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminPngquant = require('imagemin-pngquant');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
 
@@ -10,7 +8,7 @@ module.exports = {
             destination: "public/assets/thumbnails",
             plugins: [
                 imageminMozjpeg({
-                    quality: 10
+                    quality: 30
                 })
             ]
         })
