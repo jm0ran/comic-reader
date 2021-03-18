@@ -3,10 +3,9 @@ const path = require("path"); //Node js module to deal with file paths
 const fs = require("fs"); //fs is used to work with the file system
 const ejs = require("ejs")//
 
-const generateThumbs = require("./generateThumbs");
 const grabThumbs = require("./grabThumbs");
 
-generateThumbs.run();
+grabThumbs.run();
 
 const app = express(); //Initializes a new app variable with express
 
