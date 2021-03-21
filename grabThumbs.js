@@ -36,9 +36,25 @@ module.exports = {
             })
             return(directories);
         })
-        .then(directories => {
-            directories.forEach(folder => console.log(folder));
+        .then(async directories => {
+            const thumbs = new Array;
+            for (const folder of directories){
+                await fs.promises.readdir(path.join(__dirname, "public", "comics", folder))
+                .then(result => {
+                    for(let i = 0; i < result.length; i++){
+                        if (i == 0){
+                            thumbs.push(path.join(__dirname, "public", "comics", folder, result[i]))
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                });
+            }
+            return thumbs;
+
         })
+        .then(thumbs => console.log(thumbs))
         .catch(err => console.log(err.message));
     }
 }
