@@ -3,6 +3,7 @@ public/comics/*
 node_modules/
 temp.js
 public/assets/thumbnails/*
+/public/assets/temporary/*
 !public/assets/thumbnails/.gitkeep
 !public/assets/temporary/.gitkeep
-/public/assets/temporary
+!public/assets/temporary/.gitkeep
