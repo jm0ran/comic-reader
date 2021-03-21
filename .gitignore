@@ -2,7 +2,7 @@ public/comics/*
 !public/comics/.gitkeep
 node_modules/
 temp.js
-public/assets/testCompression/*
 public/assets/thumbnails/*
 !public/assets/thumbnails/.gitkeep
-!public/assets/testCompression/.gitkeep
+!public/assets/temporary/.gitkeep
+/public/assets/temporary
