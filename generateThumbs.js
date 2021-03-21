@@ -15,3 +15,13 @@ module.exports = {
         console.log(files);
     }
 }
+
+const files = await imagemin(["public/assets/temporary/*.{jpg,png}"], {
+    destination: "public/assets/thumbnails",
+    plugins: [
+        imageminMozjpeg({
+            quality: 30
+        })
+    ]
+})
+console.log(files)

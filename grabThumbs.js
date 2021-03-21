@@ -1,25 +1,10 @@
 fs = require("fs");
 path = require("path");
 jimp = require("jimp");
-const { dir } = require("console");
+const { readdir } = require("fs");
 const imagemin = require('imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
-
-/* const compressPNG = async (oPath, newName) => {
-    console.log(oPath);
-    const dest = path.join(__dirname, "public", "assets", "thumbnails", newName + ".jpg");
-    const file = await imagemin([oPath], {
-        destination: dest,
-        plugins: [
-            imageminMozjpeg({
-                quality: 30
-            })
-        ]
-    })
-    console.log(file);
-    //console.log(`Compressed to ${dest} from ${oPath}`)
-} */
-
+const Jimp = require("jimp");
 
 
 module.exports = {
@@ -43,7 +28,7 @@ module.exports = {
                 .then(result => {
                     for(let i = 0; i < result.length; i++){
                         if (i == 0){
-                            thumbs.push(path.join(__dirname, "public", "comics", folder, result[i]))
+                            thumbs.push([path.join(__dirname, "public", "comics", folder, result[i]), folder])
                         }
                         else{
                             break;
@@ -54,7 +39,35 @@ module.exports = {
             return thumbs;
 
         })
-        .then(thumbs => console.log(thumbs))
+        .then(async thumbs => {
+            for (thumb of thumbs){
+                const destination = path.join(__dirname, "public", "assets", "temporary", thumb[1] + ".jpg");
+                if(thumb[0].toLowerCase().endsWith(".jpg")){
+                    await fs.copyFile(thumb[0], destination, (err) => {
+                        if (err) throw err;
+                    });
+                }else if(thumb[0].toLowerCase().endsWith(".png")){
+                    await Jimp.read(thumb[0])
+                        .then(image => image.write(destination))
+                        .catch(err => console.log(err.message));
+                }else{
+                    console.log("Very Bad big issue, will be big problem")
+                }
+                console.log("done")
+            }
+            
+            return thumbs;
+        })
+        .then(async result => {
+            const files = await imagemin(["public/assets/temporary/*.{jpg,png}"], {
+                destination: "public/assets/thumbnails",
+                plugins: [
+                    imageminMozjpeg({
+                        quality: 30
+                    })
+                ]
+            })
+        })
         .catch(err => console.log(err.message));
     }
 }
