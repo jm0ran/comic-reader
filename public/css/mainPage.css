@@ -17,14 +17,15 @@ body, html{
 	display: inline-block;
 	color: #f2edd7;
 	vertical-align: top;
-	margin-bottom: 40px;
+	margin-bottom: 100px;
 }
 figcaption{
-	padding-top: 10px;
 	height: 100px;
 }
 img{
 	filter: drop-shadow(15px 4px 4px black);
+	max-width: 100%;
+	height: auto;
 }
 #bookCase{
 	text-align: center;
