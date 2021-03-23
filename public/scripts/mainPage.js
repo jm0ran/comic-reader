@@ -13,7 +13,7 @@ const loadComics = (data) => {
     for (const item of data.results){
         const comicName = item.replace("&", " ");
         document.getElementById("bookCase").innerHTML += 
-        `<figure class="book"><img src="http://${window.location.hostname}:5000/api/comics/${comicName}/thumb" height="100%"> <figcaption> ${comicName} </figcaption></figure>`;
+        `<a href="http://${window.location.hostname}:5000/${comicName}"><figure class="book"><img src="http://${window.location.hostname}:5000/api/comics/${comicName}/thumb" height="100%"> <figcaption> ${comicName} </figcaption></figure></a>`;
     }
 }
 

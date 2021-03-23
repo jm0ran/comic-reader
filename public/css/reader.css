@@ -1,0 +1,18 @@
+body{
+    background-color: dimgray;
+}
+#outer{
+    width: 100%;
+}
+h1{
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+#main{
+    text-align: center;
+}
+img{
+    height: 90vh;
+    width: auto;
+}
