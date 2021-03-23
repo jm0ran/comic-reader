@@ -50,6 +50,12 @@ app.get("/api/comics/:id/", (req,res) => {
     })
 })
 
+app.get("/api/comics/:id/thumb", (req, res) => {
+    let formatId = req.params.id.replace("&", ' ');
+    let thumbPath = path.join(__dirname, "public", "assets", "thumbnails", formatId + ".jpg");
+    res.sendFile(thumbPath);
+})
+
 app.get("/api/comics/:id/:fileName", (req, res) => {
     formatFolder = req.params.id.replace('&', ' ');
     formatFile = req.params.fileName.replace('&', ' ');
