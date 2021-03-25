@@ -26,14 +26,17 @@ routes.get("/api/comics/:id/", (req,res) => {
     let formatId = req.params.id.replace("&", ' ');
     let comicPath = path.join("comics", formatId);
     let results = new Array;
-    fs.readdir(path.join(__dirname, "public", "comics", formatId), (err, files) =>{
-        if (err) throw err;
+    fs.promises.readdir(path.join(__dirname, "public", "comics", formatId))
+    .then(files =>{
         files.forEach((file)=>{
             if (file.endsWith(".jpg") || file.endsWith(".png") || file.endsWith(".jpeg")){
                 results.push(file);
             }
         })
         res.json({parent: comicPath, results: results});
+    })
+    .catch(err => {
+        if (err) console.log(err);
     })
 })
 
