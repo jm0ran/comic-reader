@@ -10,15 +10,18 @@ routes.get("/home", (req, res) => {
 //Returns comic directory to user, only returns folders
 routes.get("/api/comics", (req, res) => { //When going to a website your computer is performing a get request, / is root of website, followed by function with request and response
     let comicFolders = new Array;
-    fs.readdir(path.join(__dirname, "public", "comics"), (err, files) =>{ //Read all files in /public/comics 
-        if (err) throw err; //If error throw error
+    fs.readdir(path.join(__dirname, "public", "comics"))
+    .then(files => {
         let results = [];
         files.forEach((file, index) => { //For each file
             if (fs.lstatSync(path.join(__dirname, "public", "comics", file)).isDirectory()){ //If the given file is a directory
                 results.push(file)//Push folder name to comicFolders Array
             }
         })
-        res.json({results: results});    
+        res.json({results: results});   
+    })
+    .catch(err => {
+        if (err) console.log(err.message)
     })
 });
 
@@ -36,7 +39,7 @@ routes.get("/api/comics/:id/", (req,res) => {
         res.json({parent: comicPath, results: results});
     })
     .catch(err => {
-        if (err) console.log(err);
+        if (err) console.log(err.message);
     })
 })
 
