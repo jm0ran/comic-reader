@@ -14,4 +14,13 @@
         </div>
     </div>
 </body>
+<script>
+    const checkMouseLocation = (event) => {
+        console.log(event);
+        const mouseX = event.pageX;
+        const mouseY = event.pageY;
+        console.log(`X: ${mouseX}, Y: ${mouseY}`);
+    }
+    document.getElementById("mainPage").addEventListener("click", checkMouseLocation, true);
+</script>
 </html>
