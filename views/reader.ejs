@@ -18,7 +18,7 @@
     var currentIndex = 0;
     var returnData;
     const prepare = () =>{
-        fetch("http://192.168.1.2:5000/api/comics/<%=data.message%>")
+        fetch(`http://${window.location.hostname}:5000/api/comics/<%=data.message%>`)
             .then((res) => {
                 return res.json();
             })
