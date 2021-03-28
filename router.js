@@ -5,12 +5,10 @@ routes.get("/home", (req, res) => {
     res.render("mainPage", {})
 })
 
-
-
 //Returns comic directory to user, only returns folders
 routes.get("/api/comics", (req, res) => { //When going to a website your computer is performing a get request, / is root of website, followed by function with request and response
     let comicFolders = new Array;
-    fs.readdir(path.join(__dirname, "public", "comics"))
+    fs.promises.readdir(path.join(__dirname, "public", "comics"))
     .then(files => {
         let results = [];
         files.forEach((file, index) => { //For each file

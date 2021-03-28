@@ -6,7 +6,7 @@ const ejs = require("ejs")//
 const grabThumbs = require("./grabThumbs");
 const routes = require("./router")
 
-grabThumbs.run();
+//grabThumbs.run();
 
 const app = express(); //Initializes a new app variable with express
 

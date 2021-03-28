@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="drafting.css">
     <title>Reader</title>
 </head>
-<body>
+<body onload="prepare()">
     <div id="mainContainer">
         <div id="readerContainer">
             <img id="mainPage" src="https://images-na.ssl-images-amazon.com/images/I/91SLpHwjp8L.jpg">
@@ -15,11 +15,35 @@
     </div>
 </body>
 <script>
+    const prepare = () =>{
+        fetch("http://192.168.1.2:5000/api/comics/<%=data.message%>")
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                returnData = data;
+                console.log(data);
+                document.getElementById("mainPage").src =`comics/<%=data.message%>/${data.results[currentIndex]}`;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
     const checkMouseLocation = (event) => {
-        console.log(event);
+        const border = event.target.getBoundingClientRect();
+        const elementWidth = border.right - border.left;
         const mouseX = event.pageX;
-        const mouseY = event.pageY;
-        console.log(`X: ${mouseX}, Y: ${mouseY}`);
+        if (mouseX >= border.left &&  mouseX <= border.right - elementWidth / 2){
+            console.log("left");
+        }
+        else{
+            console.log("right");
+        }
+
+        
+        
+        
+        console.log(`X: ${mouseX}`);
     }
     document.getElementById("mainPage").addEventListener("click", checkMouseLocation, true);
 </script>
