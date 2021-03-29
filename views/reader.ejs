@@ -17,6 +17,14 @@
 <script>
     var currentIndex = 0;
     var returnData;
+    const changePage = change => {
+        console.log(change);
+        if (change == 1 && currentIndex < returnData.results.length - 1){
+            document.getElementById("mainPage").src =`comics/<%=data.message%>/${returnData.results[++currentIndex]}`
+        }else if (change == -1 && currentIndex > 0){
+            document.getElementById("mainPage").src =`comics/<%=data.message%>/${returnData.results[--currentIndex]}`
+        }
+    }
     const prepare = () =>{
         fetch(`http://${window.location.hostname}:5000/api/comics/<%=data.message%>`)
             .then((res) => {
@@ -24,7 +32,6 @@
             })
             .then((data) => {
                 returnData = data;
-                console.log(data);
                 document.getElementById("mainPage").src =`comics/<%=data.message%>/${data.results[currentIndex]}`;
             })
             .catch((err) => {
@@ -36,16 +43,11 @@
         const elementWidth = border.right - border.left;
         const mouseX = event.pageX;
         if (mouseX >= border.left &&  mouseX <= border.right - elementWidth / 2){
-            document.getElementById("mainPage").src =`comics/<%=data.message%>/${returnData.results[--currentIndex]}`
+            changePage(-1);
         }
         else{
-            document.getElementById("mainPage").src =`comics/<%=data.message%>/${returnData.results[++currentIndex]}`
+            changePage(1)
         }
-
-        
-        
-        
-        console.log(`X: ${mouseX}`);
     }
     document.getElementById("mainPage").addEventListener("click", checkMouseLocation, true);
 </script>
